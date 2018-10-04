@@ -1,0 +1,34 @@
+.wrapper{
+  display: grid;
+  width: 80%;
+  height:80%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr .2fr;
+  grid-template-areas:
+          "videoholder videoholder videoholder notebook notebook"
+          "videoholder videoholder videoholder notebook notebook"
+          "controller controller controller . .";
+  margin: 0 auto;
+  background: orange;
+}
+
+.right-side{
+    /* display: grid; */
+
+}
+
+#sentenceBreakdown{
+
+  display:grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 0.3fr;
+  grid-template-areas:
+            "mainword explain explain"
+            "pronunc explain explain"
+            "wordtype explain explain";
+  background: red;
+  margin: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px auto;
+  text-align: center;
+}

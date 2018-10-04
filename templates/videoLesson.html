@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title> Marllo_video playback </title>
+   <link rel="stylesheet" href = "../static/css/style.css">
+   <link rel="stylesheet" href = "../static/css/style-grid.css">
+<h1>Marlo</h1>
+</head>
+
+<body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+<div class=wrapper>
+
+<div class=left-side>
+
+    <div class="video-wrapper">
+         <div id = "modalBox" class="modal">
+            Would you like to learn this sentence?
+            <div id = "modalContent class="modal-content">
+                <div id = "sentenceToLearn" class="sentence-learn">
+
+                </div>
+                <button id='nextButton' class='next-button'>next sentence</button>
+                <button id='learnButton' class='learn-button'>Learn</button>
+                <button id='beforeButton' class='before-button'>before sentence</button>
+            </div>
+        </div>
+      <div id="video-placeholder">
+
+        </div>
+      <section class = subBox>
+        <div class = "korsub" style="font-size:20px" id="subtitleboxKor">
+        </div>
+        <div class = "engsub" id="subtitleboxEng">
+        </div>
+
+
+      </section>
+    </div>
+
+
+
+
+
+</div>
+<div class="right-side">
+    <div class="note-container">
+        <div id="realmainsent" class="real-mainsent" >
+        </div>
+
+
+        <button id='hearVoice' class='before-button'>listen to it slowly</button>
+        <section id="lessonbox" class="lessonbox">
+            <div id="sentenceBreakdown" class="sentenceBreak">
+            </div>
+        </section>
+
+    	<button id='storeWord' class='db-button'>Store</button>
+        <button id='showTag' class='tag-button'>tags</button>
+    </div>
+</div>
+
+<div class = btnControls id="controls">
+  <button id="back">back one sentence</button>
+  <button id="play">play</button>
+  <button id="pause">pause</button>
+  <button id="skip">skip one sentence</button>
+
+</div>
+
+</div>
+
+
+<audio>
+    <source class="track" src="" type="audio/mpeg" />
+</audio>
+
+<script src="../static/js/jquery-3.1.1.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.132.0.min.js"></script>
+<script src="../static/js/youtubecontrol.js" type="text/javascript"></script>
+<script src="../static/js/polly.js" type="text/javascript"></script>
+
+</body>
+</html>
