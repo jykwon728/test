@@ -2,7 +2,8 @@
 var url = window.location.toString()
 url = new URL(url)
 //var id = url.searchParams.get('v')
-var id = 'LwkZQR9zZO8'
+// var id = 'LwkZQR9zZO8'
+var id = 'WyrQWgIhByg'
 console.log(id)
 
 var player;
@@ -34,6 +35,8 @@ function checkPause(e){
     }
     else if (e.data==1){
         modalHide()
+        lessonCardHide()
+
     }
 }
 
@@ -50,8 +53,8 @@ var loadedLesson=[];
 function gettingdata(){
   //var location ='http://192.168.1.104:5000/captions/' + id;
   //'LwkZQR9zZO8.json'// //later change this into a function so autmatically pick right url
-  var location = '../../LwkZQR9zZO8.json';
-
+  // var location = '../../LwkZQR9zZO8.json';
+var location = '../../newjson.json'
 $.ajax({
     type: "GET",
     url: location,
@@ -59,8 +62,11 @@ $.ajax({
 
     datatype: "json",
     success: function(script){
-      loadedScript=script
+      loadedScript=script.caption
+      loadedLesson=script.lesson_content
       console.log('json get successful')
+      console.log(loadedScript);
+      console.log(loadedLesson);
     }
   });
 }
@@ -111,11 +117,13 @@ var scriptNow = loadedScript[currentIndex];
 //var scriptNow = loadedScript[findindex()-1];
 var currentwords = scriptNow.WORDS;
 for(var i=0; i<currentwords.length; i++){
-  $("#realmainsent").append("<button id=word"+i+" number="+i+" class=realmainwords></button>");
-  $("#word"+i+"").html(currentwords[i].WORD);
+  console.log('sentPop is working for each words: ', currentwords)
+  $("#realmainsentContainer").append("<div id=realmainsent class=real-mainsent></div>")
+  $("#realmainsent").append("<button id=breakWord"+i+" number="+i+" class=realmain-words></button>");
+  $("#breakWord"+i).html(currentwords[i].WORD);
 
 }
-  $(".realmainwords").on('click', function(){
+  $(".realmain-words").on('click', function(){
     const number = $(this).attr('number');
     const scriptNow = loadedScript[nowindex];
     const currentwords = scriptNow.WORDS;
@@ -243,14 +251,77 @@ $(document).keydown(function(event){
 
 function modalPop(){
     console.log('modalpop works')
-    var modal= $(".modal")
+    var modal = $(".custom-modal")
     console.log(modal)
-    modal[0].style.display = 'block'
+    modal[0].style.display = 'block' //why need [0]??
 }
 function modalHide(){
-    var modal= $(".modal")
+    var modal= $(".custom-modal")
     modal[0].style.display='none'
 }
+//function that displays the mainSent boxes
+function lessonBoxPop(){
+  let lessonbox = $("#lessonBox")
+  lessonbox[0].style.display = 'block'
+}
+function lessonBoxHide(){
+  let lessonbox = $("#lessonBox")
+  lessonbox[0].style.display = 'none'
+}
+//lesson card funcitonality
+//make lesson card icon& button appear when script.lesson_content exists
 
-// $("learnButton").on('click',function(){
-//     console.log('learnButton works')
+function lessonCardPop(){
+  let lessonContainer = $("#lessonCard")
+  lessonContainer[0].style.display = 'block'
+}
+function lessonCardHide(){
+  let lessonContainer = $("#lessonCard")
+  lessonContainer[0].style.display = 'none'
+}
+
+//load all necessary lesson card components
+$("#lessonCardButton").on('click',function(){
+lessonBoxHide()
+lessonCardPop()
+console.log('lessCardButton is working');
+// $('#lessonContent').html("");
+console.log(loadedLesson[0].TITLE);
+$('#cardTitle').text(loadedLesson[0].TITLE)
+$('#cardDescription').text(loadedLesson[0].Description)
+$('#cardEquation').text('here is how to use '+loadedLesson[0].UsageCase.main_case.lesson_element+'</br>'+loadedLesson[0].Equation)
+$('#cardStructure').append('<div id="leftSideElement" class="left-side-element"></div>')
+$('#cardStructure').append('<div id="mainElement" class="main-element" ></div>')
+$('#cardStructure').append('<div id="rightSideElement" class="right-side-element"></div>')
+$('#mainElement').text(loadedLesson[0].UsageCase.main_case.lesson_element)
+$('#leftSideElement').text(loadedLesson[0].UsageCase.main_case.peripheral_element.left_side_element)
+$('#rightSideElement').text(loadedLesson[0].UsageCase.main_case.peripheral_element.right_side_element)
+
+})
+
+var currentNumber;
+//function that adds one till three
+function addOne(n){
+  if(n===3){
+      return
+    }else if(n===1 || n===2){
+      console.log('currenNum is now...: ', n)
+      return n+1
+    }else{
+      return
+    }
+}
+
+//controls happening inside the lesson card
+$("#cardButtonNext").on('click', function(){
+  let currentActive = $(".card-body div.active");
+  let dataOrder = parseInt($(currentActive).attr("data-order"));
+  let nextOrder = addOne(dataOrder);
+  console.log('nextOrder: ', nextOrder);
+  $(currentActive).removeClass('active');
+  var nextActive =  $(".card-body div[data-order='"+nextOrder+"']");
+  $(nextActive).addClass('active');
+  console.log(nextActive);
+  $(nextActive).style.display = 'block';
+  console.log('new order : ', parseInt($(currentActive).attr("data-order")));
+})

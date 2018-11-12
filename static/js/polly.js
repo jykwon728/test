@@ -7,9 +7,11 @@ AWS.config.region = 'ap-northeast-2';
 $('#learnButton').on('click', function(){
 
 console.log('learnButton works')
+sentencePop();
+lessonBoxPop()
 learnSequence();
 modalHide();
-sentencePop();
+
 });
 
 $('#hearVoice').on('click', function(){

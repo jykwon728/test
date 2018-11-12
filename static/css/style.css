@@ -46,7 +46,7 @@ padding-left: 80px; */
 margin: 0 auto;
 text-align: center;
 }
-.modal{
+.custom-modal{
 display: none;
 position: absolute;
 z-index:10;
@@ -60,7 +60,7 @@ text-align: center;
 font-size: 25px;
 color: white;
 }
-.modal-content{
+.custom-modal-content{
     margin: 0 auto;
     font-size: 25px;
     color: white;
@@ -69,16 +69,16 @@ color: white;
 .wordbreakdown-Word{
     color: white;
     grid-area: mainword;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .wordbreakdown-Pronun{
     grid-area: pronunc;
-    font-size: 1.5em;
+    font-size: 0.9em;
 }
 .wordbreakdown-Trans{
     grid-area: explain;
     margin: auto;
-    font-size: 1.7em;
+    font-size: 1.5em;
 }
 .wordbreakdown-WordType{
     display: inline;
@@ -87,23 +87,36 @@ color: white;
 }
 
 #video-placeholder{
-width: 100%;
+  width: 100%;
   background: blue;
   border: 30px;
   border-color: white;
 display: inline-block;
 }
 
+.note-container{
+  margin: 13px auto;
+  width: auto;
+  height: 90%;
+}
 
+.lesson-box{
+  display: none;
+  background-color: white;
+  height: 100%;
+}
 
+.real-mainsent-container{
+
+}
 
 .real-mainsent{
-
-  margin: auto;
+  text-align: center;
+  margin: 0 auto;
   color: white;
 
 }
-.realmainwords{
+.realmain-words{
   display: inline;
   background: none;
   border: none;

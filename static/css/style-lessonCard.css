@@ -1,0 +1,39 @@
+.active{
+
+}
+.inactive{
+
+}
+.lesson-content-container{
+  display: none;
+  height: 100%;
+}
+.lesson-content{
+  margin: 15px;
+  height: 95%;
+}
+.lesson-title{
+  margin: 0 auto;
+  font-size: 1.5em;
+  font-weight: bold ;
+  color: black;
+}
+.lesson-description{
+display: none;
+}
+.lesson-equation{
+display: none;
+}
+.lesson-structure{
+display: none;
+}
+.left-side-element{
+  grid-area: left_side_element;
+}
+.right-side-element{
+  grid-area: right_side_element;
+}
+.main-element{
+  font-size: 1.3em;
+  grid-area: main_element;
+}

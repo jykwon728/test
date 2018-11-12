@@ -1,6 +1,21 @@
 {
   "caption": [
     {
+      "END_AT": 1,
+      "WORDS": [
+        {
+          "WORD": "caption start",
+          "WORD_TYPE": "NA",
+          "PRONOUNCIATION": "nothing",
+          "TRANSLATION": "nothing",
+          "BASEFORM": "nothing",
+          "TAG_IDX": -1
+        }
+      ],
+      "SENTENCE": "잠깐만요",
+      "TRANSLATION": "wait a second"
+    },
+    {
       "END_AT": 4.95,
       "WORDS": [
         {
@@ -944,16 +959,38 @@
       "TRANSLATION": "Love you"
     }
   ],
-  "course_content": [
-    {
-      "LessonType": "질문이나",
-      "Equation": "질문이나",
-      "SentenceIdx": 2,
-      "Elements": "질문이나",
+  "lesson_content":[
+    { "VID": 2,
+      "SentenceIDX": 0,
       "ID": 3,
-      "UsageCase": "질문이나",
-      "VID": 2,
-      "TITLE": "질문이나"
+      "TITLE": "-만, only -",
+      "LessonType": "grammar",
+      "Equation": "noun + 만 + ending",
+      "Description": "만 is used to express the mereness or relative insignificance of the following object. This is similar to the expression of 'it is only a penny' or 'it is just a piece of paper'.",
+      "Elements": {"Kor": "-만", "Eng": ["just","only"]},
+      "tag": "epc",
+
+     "UsageCase": {
+        "main_case" :
+          {"sentence":"잠깐만요",
+          "lesson_element": "만",
+  				"peripheral_element": {
+  				    "left_side_element": "잠깐","left_side_element_full form": null, "right_side_element": "요", "right_side_element_fullform": null}
+            },
+
+        "other_case": [
+          {"sentence":"한번만요",
+            "lesson_element": "만",
+    				"peripheral_element": {
+    				    "left_side_element": "한 번","left_side_element_full form": null, "right_side_element": "요", "right_side_element_fullform": null}
+          },
+          {"sentence":"한시간만요",
+            "lesson_element": "만",
+    				"peripheral_element": {
+    				    "left_side_element": "한 시간","left_side_element_full form": null, "right_side_element": "요", "right_side_element_fullform": null}
+          }
+        ]
+      }
     }
   ]
 }
