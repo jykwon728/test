@@ -47,15 +47,15 @@
 
 <div class="right-side">
     <div id="noteContainer" class="note-container">
-        <div id="realmainsentContainer" class="real-mainsent-container" >
-        </div>
+      <div id="realmainsentContainer" class="real-mainsent-container" >
+      </div>
 
 
-        <!-- <button id='hearVoice' class='before-button'>listen to it slowly</button> -->
-        <section id="lessonBox" class="lesson-box">
-            <div id="sentenceBreakdown" class="sentenceBreak">
-            </div>
-        </section>
+      <!-- <button id='hearVoice' class='before-button'>listen to it slowly</button> -->
+      <section id="lessonBox" class="lesson-box">
+          <div id="sentenceBreakdown" class="sentenceBreak">
+          </div>
+      </section>
 
       <div id="lessonCard" class="lesson-content-container">
 
@@ -71,9 +71,14 @@
             <h4 id="cardTitle" class="lesson-title card-title"></h4>
             <div id="cardDescription" data-order=1 class="lesson-card-content active lesson-description card-text"></div>
             <div id="cardEquation" data-order=2 class="lesson-card-content lesson-equation text-center"></div>
-            <div id="cardStructure" data-order=3 class="lesson-card-content lesson-structure text-center"></div>
+            <div id="cardStructure" data-order=3 class="lesson-card-content lesson-card-structure text-center">
+              <div id="cardMainCase" class="lesson-structure case-active"></div>
+            </div>
             <button id="cardButtonNext" class="btn btn-primary" type="button" style="margin-right: 4px;padding-left: 12px;position: relative;">next</button>
           </section>
+
+        </div>
+        <div id="nested-video-placeholder" class="nested-vidplace">
 
         </div>
       </div>
@@ -103,9 +108,13 @@
 </audio>
 
 <script src="../static/js/jquery-3.1.1.js"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+  integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+  crossorigin="anonymous"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.132.0.min.js"></script>
-<script src="../static/js/youtubecontrol.js" type="text/javascript"></script>
+<script src="../static/js/VideoLearnMain.js" type="module"></script>
 <script src="../static/js/lessoncard.js" type="text/javascript"></script>
 <script src="../static/js/polly.js" type="text/javascript"></script>
 

@@ -37,8 +37,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
             "left_side_element main_element right_side_element";
-  background: green;
-  margin: 20px;
+  /* background: green; */
+  margin: 5px;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   font-size: 20px auto;

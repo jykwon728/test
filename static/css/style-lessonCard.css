@@ -4,6 +4,13 @@
 .inactive{
 
 }
+.case-active{
+font-size: 1.5rem;
+font-weight: bold;
+}
+.case-inactive{
+font-size: small;
+}
 .lesson-content-container{
   display: none;
   height: 100%;
@@ -19,13 +26,13 @@
   color: black;
 }
 .lesson-description{
-display: none;
+  display: block;
 }
 .lesson-equation{
 display: none;
 }
-.lesson-structure{
-display: none;
+.lesson-card-structure{
+  display: none;
 }
 .left-side-element{
   grid-area: left_side_element;
