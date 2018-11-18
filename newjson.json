@@ -980,64 +980,23 @@
 
         "other_case": [
           {"sentence":"한번만요",
+            "translation": "just once",
             "lesson_element": "만",
     				"peripheral_element": {
     				    "left_side_element": "한 번","left_side_element_fullform": "하나 번 째", "left_side_element_def": "once", "right_side_element": "요", "right_side_element_fullform": "-요", "right_side_element_def": "honorific"},
             "source": {
-              "vid_id":"WyrQWgIhByg",
+              "vid_id":"ShZ93ceEUs8",
               "viewed_date":"2018-11-07",
               "sent_idx":"14"
             }
           },
           {"sentence":"한시간만요",
+            "translation": "just one hour",
             "lesson_element": "만",
     				"peripheral_element": {
     				    "left_side_element": "한 시간","left_side_element_fullform": "하나 시간", "left_side_element_def": "one hour", "right_side_element": "요", "right_side_element_fullform": "-요", "right_side_element_def": "honorific"},
             "source": {
-              "vid_id":"WyrQWgIhByg",
-              "viewed_date":"2018-11-07",
-              "sent_idx":"16"
-            }
-          }
-        ]
-      }
-    },
-
-    { "VID": 2,
-      "SentenceIDX": 0,
-      "ID": 3,
-      "TITLE": "-만, only -",
-      "LessonType": "grammar",
-      "Equation": "noun + 만 + ending",
-      "Description": "만 is used to express the mereness or relative insignificance of the following object. This is similar to the expression of 'it is only a penny' or 'it is just a piece of paper'.",
-      "Elements": {"Kor": "-만", "Eng": ["just","only"]},
-      "tag": "epc",
-
-     "UsageCase": {
-        "main_case" :
-          {"sentence":"잠깐만요",
-          "lesson_element": "만",
-  				"peripheral_element": {
-  				    "left_side_element": "잠깐","left_side_element_full form": null, "right_side_element": "요", "right_side_element_fullform": null}
-            },
-
-        "other_case": [
-          {"sentence":"한번만요",
-            "lesson_element": "만",
-    				"peripheral_element": {
-    				    "left_side_element": "한 번","left_side_element_fullform": "하나 번 째", "left_side_element_def": "once", "right_side_element": "요", "right_side_element_fullform": "-요", "right_side_element_def": "honorific"},
-            "source": {
-              "vid_id":"WyrQWgIhByg",
-              "viewed_date":"2018-11-07",
-              "sent_idx":"14"
-            }
-          },
-          {"sentence":"한시간만요",
-            "lesson_element": "만",
-    				"peripheral_element": {
-    				    "left_side_element": "한 시간","left_side_element_fullform": "하나 시간", "left_side_element_def": "one hour", "right_side_element": "요", "right_side_element_fullform": "-요", "right_side_element_def": "honorific"},
-            "source": {
-              "vid_id":"WyrQWgIhByg",
+              "vid_id":"o8NPllzkFhE",
               "viewed_date":"2018-11-07",
               "sent_idx":"16"
             }

@@ -1,60 +1,45 @@
-import {gettingScript, loadedScript, loadedLesson} from './videoLesson/loadScript.js'
+import {gettingScript} from './videoLesson/loadScript.js'
+import {onYouTubeIframeAPIReady as loadVideo, mainPlayer as player } from './videoLesson/youtubeAPI.js'
 
-
-var url = window.location.toString()
-url = new URL(url)
-//var id = url.searchParams.get('v')
-// var id = 'LwkZQR9zZO8'
-var id = 'WyrQWgIhByg'
+var mainVideoId = 'WyrQWgIhByg'
 var scriptLocation = '../../newjson.json'
 
-gettingScript().then(loadLessonCard);
+
+var loadedScript=[];
+var loadedLesson=[];
+
+gettingScript(scriptLocation)
+  .then(function(result){
+    console.log('here is the scriptloaded ', result);
+    loadedScript = result.caption
+    loadedLesson = result.lesson_content
+    loadLessonCard(result)
+    return loadedLesson
+  })
+  .then(function(result){
+    loadVideo(result)})
 
 
 
 //loading video to placeholder
-var player;
-var nestedPlayer;
-window.onYouTubeIframeAPIReady = function(){
-        player = new YT.Player('video-placeholder', {
-        width: 800,
-        height: 500,
-        videoId: id,
-        playerVars: {
-            autoplay: 0,
-            color: 'white',
-            controls:0,
-            rel:0,
-            iv_load_policy: 3,
 
+loadVideo(loadedLesson)
+// console.log('this is player ',player);
 
-        },
-        events: {
-            onReady: initialize,
-            onStateChange: checkPause
-        }
-    })
-        nestedPlayer = new YT.Player('nested-video-placeholder', {
-        width: 400,
-        height: 250,
-        // videoId: loadedLesson[0].UsageCase.other_case[0].source.vid_id,
-        videoId:'WyrQWgIhByg',
-        playerVars: {
-            autoplay: 0,
-            color: 'white',
-            controls:0,
-            rel:0,
-            iv_load_policy: 3,
-          }
-        });
-}
+$('#learnButton').on('click', function(){
 
+console.log('learnButton works')
+sentencePop();
+lessonBoxPop()
+learnSequence();
+modalHide();
+
+});
 
 function initialize(){
-  
-gettingdata()
 repeatShowScript()
 }
+
 
 function checkPause(e){
     if (e.data == 2){
@@ -81,7 +66,7 @@ var currentIndex = 0;
 //this makes a loop through all the objects
 function findindex(){
     currentIndex = loadedScript.length - 1;
-  for(i=0; i<loadedScript.length; i++) {
+  for(var i=0; i<loadedScript.length; i++) {
     if (loadedScript[i].END_AT > player.getCurrentTime()){
         currentIndex = i;
         break;
@@ -291,7 +276,7 @@ lessonBoxHide()
 lessonCardPop()
 console.log('lessCardButton is working');
 // $('#lessonContent').html("");
-console.log(loadedLesson[0].TITLE);
+
 
 
 })
@@ -333,48 +318,88 @@ $("#cardButtonNext").on('click', function(){
 })
 
 function loadLessonCard(){
+  for(var i=0; i<loadedLesson.length; i++){
+    $('#cardBody').append('<div id="cardContent'+i+'" class="card-content"></div>')
+    $('#cardContent'+i).append('<div id="cardTitle'+i+'" class="lesson-title card-title"></div>')
+                      .append('<div id="cardDescription'+i+'" data-order=1 class="lesson-card-content active lesson-description card-text"></div>')
+                      .append('<div id="cardEquation'+i+'" data-order=2 class="lesson-card-content lesson-equation text-center"></div>')
+                      .append('<div id="cardCase'+i+'" data-order=3 class="lesson-card-content lesson-card-case text-center"></div>')
+
+    $('#cardCase'+i).append('<div id="cardCaseSentence'+i+'" class="card-case-sentence"></div>')
+                    .append('<div id="cardCaseStructure'+i+'" class="card-case-structure"></div>')
+                    .append('<div id="cardCaseTranslation'+i+'" class="card-case-translation"></div>')
+                    .append('<div id="cardCaseVidImage'+i+'" class="card-case-vid-image"></div>')
+
+
+
+    $('#cardTitle'+i).text(loadedLesson[i].TITLE)
+    $('#cardDescription'+i).text(loadedLesson[i].Description)
+    $('#cardEquation'+i).text('here is how to use '+loadedLesson[i].UsageCase.main_case.lesson_element+' '+loadedLesson[0].Equation)
+
+
+
+    var numOtherCase = loadedLesson[i].UsageCase.other_case
+    for(var x=0; x<numOtherCase.length; x++){
+      console.log('loop for numOtherCase is working really: ', numOtherCase);
+      let otherCaseVidId = numOtherCase[x].source.vid_id;
+      $('#cardCaseSentence'+i).append('<div id="caseSentence'+i+x+'" class="case-sentence"  data-vidId="'+otherCaseVidId+'"></div>')
+        $('#caseSentence'+i+x).text(numOtherCase[x].sentence).click(activateCase)
+
+      $('#cardCaseStructure'+i).append('<div id="caseStructure'+i+x+'" class="case-structure"></div>')
+        $('#caseStructure'+i+x).append('<div id="peripheralElement'+i+x+'" class="peripheral-element"></div>')
+          $('#peripheralElement'+i+x).append('<div id="peripheralElementMain'+i+x+'" class="peripheral-element-main"></div>').append('<div id="peripheralElementLeft'+i+x+'" class="peripheral-element-left"></div>').append('<div id="peripheralElementRight'+i+x+'" class="peripheral-element-right"></div>')
+            $('#peripheralElementMain'+i+x).text(numOtherCase[x].lesson_element)
+            $('#peripheralElementLeft'+i+x).text(numOtherCase[x].peripheral_element.left_side_element)
+            $('#peripheralElementRight'+i+x).text(numOtherCase[x].peripheral_element.right_side_element)
+
+      $('#cardCaseTranslation'+i).append('<div id="caseTranslation'+i+x+'" class="case-translation"></div>')
+      $('#caseTranslation'+i+x).text(numOtherCase[x].translation)
+    }
+  }
 //feature that fetches othercaseinfo into carstructure and make interface
-$('#cardTitle').text(loadedLesson[0].TITLE)
-$('#cardDescription').text(loadedLesson[0].Description)
-$('#cardEquation').text('here is how to use '+loadedLesson[0].UsageCase.main_case.lesson_element+'</br>'+loadedLesson[0].Equation)
-$('#cardMainCase').append('<div id="leftSideElement" class="left-side-element"></div>')
-$('#cardMainCase').append('<div id="mainElement" class="main-element" ></div>')
-$('#cardMainCase').append('<div id="rightSideElement" class="right-side-element"></div>')
-$('#mainElement').text(loadedLesson[0].UsageCase.main_case.lesson_element)
-$('#leftSideElement').text(loadedLesson[0].UsageCase.main_case.peripheral_element.left_side_element)
-$('#rightSideElement').text(loadedLesson[0].UsageCase.main_case.peripheral_element.right_side_element)
+
+//////
+// $('#cardMainCase').append('<div id="leftSideElement" class="left-side-element"></div>')
+// $('#cardMainCase').append('<div id="mainElement" class="main-element" ></div>')
+// $('#cardMainCase').append('<div id="rightSideElement" class="right-side-element"></div>')
+// $('#mainElement').text(loadedLesson[0].UsageCase.main_case.lesson_element)
+// $('#leftSideElement').text(loadedLesson[0].UsageCase.main_case.peripheral_element.left_side_element)
+// $('#rightSideElement').text(loadedLesson[0].UsageCase.main_case.peripheral_element.right_side_element)
+/////
 
 //append the other_case
-const numOtherCase = loadedLesson[0].UsageCase.other_case
-console.log('this is length of numOthercase: ', typeof(numOtherCase.length));
-for(i=0; i<numOtherCase.length; i++){
-  console.log('looping for numOthercase is working')
-  let otherCaseVidId = loadedLesson[0].UsageCase.other_case[i].source.vid_id;
-  $('#cardStructure').append('<div id="cardOtherCase'+i+'" class="lesson-structure" data-vidId="'+otherCaseVidId+'"></div>').children('.lesson-structure').click(activateCase)//chanied jquery method. this is necessary to attach click events on newly appended element
-  $('#cardOtherCase'+i).append('<div id="otherLeftSideElement'+i+'" class="left-side-element"></div>')
-  $('#cardOtherCase'+i).append('<div id="otherMainElement'+i+'" class="main-element" ></div>')
-  $('#cardOtherCase'+i).append('<div id="otherRightSideElement'+i+'" class="right-side-element"></div>')
-  $('#otherMainElement'+i).text(loadedLesson[0].UsageCase.other_case[i].lesson_element)
-  $('#otherLeftSideElement'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.left_side_element)
-  $('#otherRightSideElement'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.right_side_element)
+// for(var x=0; x<loadedLesson.length;x++)
+//   var numOtherCase = loadedLesson[x].UsageCase.other_case //make this into another loop for multiple lessons
+//   console.log('this is length of numOthercase: ', typeof(numOtherCase.length));
+//   for(var i=0; i<numOtherCase.length; i++){
+//     console.log('looping for numOthercase is working')
+//     let otherCaseVidId = loadedLesson[0].UsageCase.other_case[i].source.vid_id;
+//     $('#cardStructure').append('<div id="cardOtherCase'+i+'" class="lesson-structure" data-vidId="'+otherCaseVidId+'"></div>').children('.lesson-structure').click(activateCase)//chanied jquery method. this is necessary to attach click events on newly appended element
+//     $('#cardOtherCase'+i).append('<div id="otherLeftSideElement'+i+'" class="left-side-element"></div>')
+//     $('#cardOtherCase'+i).append('<div id="otherMainElement'+i+'" class="main-element" ></div>')
+//     $('#cardOtherCase'+i).append('<div id="otherRightSideElement'+i+'" class="right-side-element"></div>')
+//     $('#otherMainElement'+i).text(loadedLesson[0].UsageCase.other_case[i].lesson_element)
+//     $('#otherLeftSideElement'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.left_side_element)
+//     $('#otherRightSideElement'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.right_side_element)
+//
+//   //change the appendee to #cardOtherCaseContent
+//     $('#cardOtherCase').append('<div id="cardOtherCaseContent'+i+'"></div>')
+//     $('#cardOtherCaseContent'+i).append('<div id="otherCaseSource'+i+'" class="other-case-source"></div>').append('<div id="otherPeriph'+i+'"class="other-periph" ></div>')//dafult should be hidden for OtherPeriph
+//
+//         $('#otherPeriph'+i).append('<div id="otherPeriphLeftForm'+i+'" class="other-left-periph"></div> ').append('<div id="otherPeriphRightForm'+i+'" class="other-right-periph"></div>')
+//         $('#otherPeriphLeftForm'+i).append('<div id="otherPeriphLeftFull'+i+'"></div>').append('<div id="otherPeriphLeftDef'+i+'"></div>')
+//         $('#otherPeriphRightForm'+i).append('<div id="otherPeriphRightFull'+i+'"></div>').append('<div id="otherPeriphRightDef'+i+'"></div>')
+//
+//     //texting the divs
+//         $('#otherPeriphLeftFull'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.left_side_element_fullform)
+//         $('#otherPeriphRightFull'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.right_side_element_fullform)
+//         $('#otherPeriphLeftDef'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.left_side_element_def)
+//         $('#otherPeriphRightDef'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.right_side_element_def)
+//
+//           //load youtubeclip image and source information that explains where this othercase sentence comes from
+//     $('#otherCaseSource'+i)
+// }
 
-//change the appendee to #cardOtherCaseContent
-  $('#cardStructure').append('<div id="cardOtherCaseContent'+i+'"></div>')
-  $('#cardOtherCaseContent'+i).append('<div id="otherCaseSource'+i+'" class="other-case-source"></div>')
-    $('#otherCaseSource'+i).append('<div id="otherPeriph'+i+'"class="other-periph"></div>')
-      $('#otherPeriph'+i).append('<div id="otherPeriphLeftForm'+i+'" class=""></div> ').append('<div id="otherPeriphRightForm'+i+'" class=""></div>')
-        $('#otherPeriphLeftForm'+i).append('<div id="otherPeriphLeftFull'+i+'"></div>').append('<div id="otherPeriphLeftDef'+i+'"></div>')
-        $('#otherPeriphRightForm'+i).append('<div id="otherPeriphRightFull'+i+'"></div>').append('<div id="otherPeriphRightDef'+i+'"></div>')
-
-  //texting the divs
-        $('#otherPeriphLeftFull'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.left_side_element_fullform)
-        $('#otherPeriphRightFull'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.right_side_element_fullform)
-        $('#otherPeriphLeftDef'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.left_side_element_def)
-        $('#otherPeriphRightDef'+i).text(loadedLesson[0].UsageCase.other_case[i].peripheral_element.right_side_element_def)
-
-
-
-}
 var lessonCases;
 lessonCases = $("#cardStructure").find('div.lesson-structure')
 lessonCases.on('click', activateCase)
@@ -384,14 +409,14 @@ lessonCases.on('click', activateCase)
 function activateCase(){
   //selected will activate the clicked and set animation
   console.log('bringCaseSource Working! ', $(this))
-  $(".lesson-structure").removeClass('case-active')
-  $(".lesson-structure").addClass('case-inactive')
+  $(".case-sentence").removeClass('case-active')
+  $(".case-sentence").addClass('case-inactive')
   $(this).switchClass('case-inactive','case-active')
   let vidId = $(this).attr("data-vidId")
   console.log('here is the selected cases vidid: ', vidId);
   nestedVideoCall(vidId)
-  nestedPlayer.seekTo(13)
-  nestedPlayer.playVideo()
+  // nestedPlayer.seekTo(13)
+  // nestedPlayer.playVideo()
 
   //append the source information to 'cardOtherCase'
   // $('#cardOtherCase')
@@ -400,6 +425,12 @@ function activateCase(){
 //make a nested youtuebPlayer!
 
 function nestedVideoCall(selectedVidId){
-  $('#nested-video-placeholder').show()
+ let selectedVideo =  $('.other-case-video[data-vidId="'+selectedVidId+'"]')
+ let allVideos = $('.other-case-video')
+ allVideos.removeClass('video-active')
+ selectedVideo.addClass('video-active')
   // events:
 }
+
+
+export {mainVideoId, initialize, checkPause}

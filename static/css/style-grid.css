@@ -32,6 +32,7 @@
   font-size: 20px auto;
   text-align: center;
 }
+
 .lesson-structure{
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -43,4 +44,27 @@
   text-align: center;
   font-size: 20px auto;
 
+}
+
+.card-other-case{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 0.3fr 0.3fr 1.5fr;
+  grid-template-areas:
+            "case_sentence"
+            "other-periph"
+            "other-definition"
+            "result_sentence"
+            "source_video_img"
+
+}
+.peripheral-element{
+  grid-area: other-periph;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "left_side_element main_element right_side_element";
+  margin: 5px;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  font-size: 20px auto;
 }

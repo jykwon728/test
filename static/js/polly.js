@@ -4,15 +4,7 @@ AWS.config.secretAccessKey = 'FdoRdSUm3VnneLHpn3JCErXrZ/Cpl4vaAodsk7xR';
 AWS.config.region = 'ap-northeast-2';
 
 
-$('#learnButton').on('click', function(){
 
-console.log('learnButton works')
-sentencePop();
-lessonBoxPop()
-learnSequence();
-modalHide();
-
-});
 
 $('#hearVoice').on('click', function(){
 console.log('poly function works')

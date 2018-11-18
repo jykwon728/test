@@ -30,9 +30,11 @@
                 <button id='beforeButton' class='before-button'>before sentence</button>
             </div>
         </div>
-      <div id="video-placeholder">
-
+      <div id="videoPlaceholder">
+        <div id="mainVideoPlaceholder" class="main-video-placeholder"></div>
+        <div id="nestedVideoGroup" class="nested-video-group"></div>
         </div>
+
       <section class = subBox>
         <div class = "korsub" style="font-size:20px" id="subtitleboxKor">
         </div>
@@ -67,20 +69,14 @@
                   <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-star"></i></a></li>
               </ul>
           </div>
-          <section class="card-body">
-            <h4 id="cardTitle" class="lesson-title card-title"></h4>
-            <div id="cardDescription" data-order=1 class="lesson-card-content active lesson-description card-text"></div>
-            <div id="cardEquation" data-order=2 class="lesson-card-content lesson-equation text-center"></div>
-            <div id="cardStructure" data-order=3 class="lesson-card-content lesson-card-structure text-center">
-              <div id="cardMainCase" class="lesson-structure case-active"></div>
-            </div>
+          <section id="cardBody" class="card-body">
+
+    
             <button id="cardButtonNext" class="btn btn-primary" type="button" style="margin-right: 4px;padding-left: 12px;position: relative;">next</button>
           </section>
 
         </div>
-        <div id="nested-video-placeholder" class="nested-vidplace">
 
-        </div>
       </div>
 
 

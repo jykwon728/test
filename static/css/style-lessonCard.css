@@ -29,9 +29,9 @@ font-size: small;
   display: block;
 }
 .lesson-equation{
-display: none;
+  display: none;
 }
-.lesson-card-structure{
+.lesson-card-case{
   display: none;
 }
 .left-side-element{
@@ -43,4 +43,26 @@ display: none;
 .main-element{
   font-size: 1.3em;
   grid-area: main_element;
+}
+
+/* othercase elements styling */
+.peripheral-element-main{
+  font-size: 1.3em;
+  grid-area: main_element;
+}
+.peripheral-element-left{
+  grid-area: left_side_element;
+}
+.peripheral-element-right{
+  grid-area: right_side_element;
+}
+
+.other-case-video{
+
+}
+.video-inactive{
+  display:none;
+}
+.video-active{
+  display:block;
 }

@@ -1,4 +1,4 @@
-let loadedScript=[];
+var loadedScript=[];
 let loadedLesson=[];
 
 const gettingScript=function(location){
@@ -9,11 +9,13 @@ const gettingScript=function(location){
         crossDomain: true,
         datatype: "json",
         success: function(script){
-          loadedScript=script.caption
-          loadedLesson=script.lesson_content
-          console.log('json get successful')
+          console.log('json get successful: ', script)
+          resolve(script)
+
+
         }
       })
     })
 }
-export{gettingScript, loadedScript, loadedLesson}
+
+export{gettingScript}
