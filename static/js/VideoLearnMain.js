@@ -1,7 +1,7 @@
 import {gettingScript} from './videoLesson/loadScript.js'
-import {onYouTubeIframeAPIReady as loadVideo, mainPlayer as player } from './videoLesson/youtubeAPI.js'
+import {onYouTubeIframeAPIReady as loadVideo, mainPlayer as player, nestedPlayers } from './videoLesson/youtubeAPI.js'
 
-var mainVideoId = 'WyrQWgIhByg'
+var mainVideoId = '7ai3Av5sOAk'
 var scriptLocation = '../../newjson.json'
 
 
@@ -21,9 +21,10 @@ gettingScript(scriptLocation)
 
 
 
+
 //loading video to placeholder
 
-loadVideo(loadedLesson)
+
 // console.log('this is player ',player);
 
 $('#learnButton').on('click', function(){
@@ -303,15 +304,18 @@ $("#cardButtonNext").on('click', function(){
 
   if(dataOrder===2){
     $(currentActive).removeClass('active');
-    $(currentActive).hide();
+    $(currentActive).addClass('inactive');
     $('#cardButtonNext').hide();
+    $(nextActive).removeClass('inactive');
     $(nextActive).addClass('active');
-    $(nextActive).css("display", "block");
+
   }else{
     $(currentActive).removeClass('active');
+    $(currentActive).addClass('inactive');
+    $(nextActive).removeClass('inactive');
     $(nextActive).addClass('active');
-    $(currentActive).hide();
-    $(nextActive).show();
+
+
   }
 
   //add to disapear next button when reach 3;
@@ -322,19 +326,19 @@ function loadLessonCard(){
     $('#cardBody').append('<div id="cardContent'+i+'" class="card-content"></div>')
     $('#cardContent'+i).append('<div id="cardTitle'+i+'" class="lesson-title card-title"></div>')
                       .append('<div id="cardDescription'+i+'" data-order=1 class="lesson-card-content active lesson-description card-text"></div>')
-                      .append('<div id="cardEquation'+i+'" data-order=2 class="lesson-card-content lesson-equation text-center"></div>')
-                      .append('<div id="cardCase'+i+'" data-order=3 class="lesson-card-content lesson-card-case text-center"></div>')
+                      .append('<div id="cardEquation'+i+'" data-order=2 class="lesson-card-content inactive lesson-equation text-center"></div>')
+                      .append('<div id="cardCase'+i+'" data-order=3 class="lesson-card-content inactive lesson-card-case text-center"></div>')
 
     $('#cardCase'+i).append('<div id="cardCaseSentence'+i+'" class="card-case-sentence"></div>')
-                    .append('<div id="cardCaseStructure'+i+'" class="card-case-structure"></div>')
-                    .append('<div id="cardCaseTranslation'+i+'" class="card-case-translation"></div>')
-                    .append('<div id="cardCaseVidImage'+i+'" class="card-case-vid-image"></div>')
+
+
+
 
 
 
     $('#cardTitle'+i).text(loadedLesson[i].TITLE)
     $('#cardDescription'+i).text(loadedLesson[i].Description)
-    $('#cardEquation'+i).text('here is how to use '+loadedLesson[i].UsageCase.main_case.lesson_element+' '+loadedLesson[0].Equation)
+    $('#cardEquation'+i).text('here is how to use '+loadedLesson[i].UsageCase.main_case.lesson_element+' '+loadedLesson[i].Equation)
 
 
 
@@ -342,18 +346,34 @@ function loadLessonCard(){
     for(var x=0; x<numOtherCase.length; x++){
       console.log('loop for numOtherCase is working really: ', numOtherCase);
       let otherCaseVidId = numOtherCase[x].source.vid_id;
-      $('#cardCaseSentence'+i).append('<div id="caseSentence'+i+x+'" class="case-sentence"  data-vidId="'+otherCaseVidId+'"></div>')
+
+      $('#cardCase'+i).append('<div id="cardCaseContentWrapper'+i+x+'" class="card-case-content-wrapper case-content-inactive" style="display: none" data-index="'+i+x+'"></div>')
+        $('#cardCaseContentWrapper'+i+x).append('<div id="cardCaseStructure'+i+x+'" class="card-case-structure"></div>')
+                                      .append('<div id="cardCaseTranslation'+i+x+'" class="card-case-translation"></div>')
+                                      .append('<div id="cardCaseVidImage'+i+x+'" class="card-case-vid-image"></div>')
+      $('#cardCaseSentence'+i).append('<div id="caseSentence'+i+x+'" class="case-sentence" data-index="'+i+x+'"  data-vidId="'+otherCaseVidId+'"></div>')
         $('#caseSentence'+i+x).text(numOtherCase[x].sentence).click(activateCase)
 
-      $('#cardCaseStructure'+i).append('<div id="caseStructure'+i+x+'" class="case-structure"></div>')
+      $('#cardCaseStructure'+i+x).append('<div id="caseStructure'+i+x+'" class="case-structure"></div>')
         $('#caseStructure'+i+x).append('<div id="peripheralElement'+i+x+'" class="peripheral-element"></div>')
-          $('#peripheralElement'+i+x).append('<div id="peripheralElementMain'+i+x+'" class="peripheral-element-main"></div>').append('<div id="peripheralElementLeft'+i+x+'" class="peripheral-element-left"></div>').append('<div id="peripheralElementRight'+i+x+'" class="peripheral-element-right"></div>')
+          $('#peripheralElement'+i+x).append('<div id="peripheralElementMain'+i+x+'" class="peripheral-element-main"></div>')
+                                      .append('<div id="peripheralElementLeft'+i+x+'" class="peripheral-element-left"></div>')
+                                      .append('<div id="peripheralElementRight'+i+x+'" class="peripheral-element-right"></div>')
             $('#peripheralElementMain'+i+x).text(numOtherCase[x].lesson_element)
             $('#peripheralElementLeft'+i+x).text(numOtherCase[x].peripheral_element.left_side_element)
             $('#peripheralElementRight'+i+x).text(numOtherCase[x].peripheral_element.right_side_element)
 
-      $('#cardCaseTranslation'+i).append('<div id="caseTranslation'+i+x+'" class="case-translation"></div>')
-      $('#caseTranslation'+i+x).text(numOtherCase[x].translation)
+      $('#cardCaseTranslation'+i+x).append('<div id="caseTranslation'+i+x+'" class="case-translation"></div>')
+      $('#caseTranslation'+i+x).text('"'+numOtherCase[x].translation+'"')
+
+      var imgurl = "https://img.youtube.com/vi/"+otherCaseVidId+"/sddefault.jpg"
+      //get corrensponding video's attribute data-vid-order
+
+
+      $('#cardCaseVidImage'+i+x).append('<img id="caseVidImage'+i+x+'" vidId="'+otherCaseVidId+'" class="case-vid-image" src="'+imgurl+'"  height="250" width="350"></img>')
+      $('#caseVidImage'+i+x).on('click', nestedVideoCall)
+
+
     }
   }
 //feature that fetches othercaseinfo into carstructure and make interface
@@ -407,14 +427,21 @@ lessonCases.on('click', activateCase)
 
 
 function activateCase(){
+  let index = $(this).attr("data-index");
   //selected will activate the clicked and set animation
-  console.log('bringCaseSource Working! ', $(this))
+  console.log('bringCaseSource Working! ', index)
   $(".case-sentence").removeClass('case-active')
   $(".case-sentence").addClass('case-inactive')
+  $(".card-case-content-wrapper").removeClass('case-content-active')
+  $(".card-case-content-wrapper").css('display', 'none')
+  $(".card-case-content-wrapper").addClass('case-content-inactive')
+  let selectedWrapper = $('.card-case-content-wrapper[data-index='+index+']')
+  console.log('this is selectedWrapper object', selectedWrapper);
+  selectedWrapper.css('display', 'grid')
   $(this).switchClass('case-inactive','case-active')
-  let vidId = $(this).attr("data-vidId")
+  let vidId = $(this).attr("data-vidId");
   console.log('here is the selected cases vidid: ', vidId);
-  nestedVideoCall(vidId)
+  // nestedVideoCall(vidId)
   // nestedPlayer.seekTo(13)
   // nestedPlayer.playVideo()
 
@@ -424,12 +451,22 @@ function activateCase(){
 }
 //make a nested youtuebPlayer!
 
-function nestedVideoCall(selectedVidId){
- let selectedVideo =  $('.other-case-video[data-vidId="'+selectedVidId+'"]')
+function nestedVideoCall(){
+ console.log('nestedVideoCall is working', nestedPlayers);
+ let imageVidid = $(this).attr('vidId')
+ // let nestedPlayerVideoIndex = $(this).attr('data-vid-order')
+ let selectedVideo =  $('.other-case-video[data-vidId="'+imageVidid+'"]')
  let allVideos = $('.other-case-video')
  allVideos.removeClass('video-active')
  selectedVideo.addClass('video-active')
-  // events:
+  // get variable for selected nested player
+  let selectedVideoOrder = selectedVideo.attr('data-vid-order')
+
+  let startTime = loadedLesson[0].UsageCase.other_case[0].source.timestamp.start
+
+  let endTime = loadedLesson[0].UsageCase.other_case[0].source.timestamp.end
+
+  nestedPlayers[selectedVideoOrder].playVideo()
 }
 
 

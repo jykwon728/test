@@ -45,6 +45,7 @@ padding-bottom: 0px;
 padding-left: 80px; */
 margin: 0 auto;
 text-align: center;
+z-index: 10;
 }
 .custom-modal{
 display: none;

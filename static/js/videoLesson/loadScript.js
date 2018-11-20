@@ -1,5 +1,4 @@
-var loadedScript=[];
-let loadedLesson=[];
+
 
 const gettingScript=function(location){
   return new Promise(function(resolve, reject){

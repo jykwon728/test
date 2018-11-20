@@ -987,7 +987,7 @@
             "source": {
               "vid_id":"ShZ93ceEUs8",
               "viewed_date":"2018-11-07",
-              "sent_idx":"14"
+              "timestamp":{"start":"14", "end":"18"}
             }
           },
           {"sentence":"한시간만요",
@@ -998,7 +998,7 @@
             "source": {
               "vid_id":"o8NPllzkFhE",
               "viewed_date":"2018-11-07",
-              "sent_idx":"16"
+              "timestamp":{"start":"24", "end":"28"}
             }
           }
         ]

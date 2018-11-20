@@ -2,7 +2,7 @@
 
 }
 .inactive{
-
+display:none;
 }
 .case-active{
 font-size: 1.5rem;
@@ -10,6 +10,12 @@ font-weight: bold;
 }
 .case-inactive{
 font-size: small;
+}
+.case-content-active{
+
+}
+.case-content-inactive{
+
 }
 .lesson-content-container{
   display: none;
@@ -26,13 +32,12 @@ font-size: small;
   color: black;
 }
 .lesson-description{
-  display: block;
 }
 .lesson-equation{
-  display: none;
+
 }
 .lesson-card-case{
-  display: none;
+
 }
 .left-side-element{
   grid-area: left_side_element;
@@ -58,7 +63,14 @@ font-size: small;
 }
 
 .other-case-video{
-
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 .video-inactive{
   display:none;

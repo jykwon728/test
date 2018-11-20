@@ -1,7 +1,7 @@
 import {mainVideoId, initialize, checkPause} from '../VideoLearnMain.js'
 
 let mainPlayer={};
-let nestedPlayers=[];
+var nestedPlayers=[];
 
 function onYouTubeIframeAPIReady(loadedLesson){
   console.log('this is lodeaded lesson length: ', loadedLesson ,loadedLesson.length);
@@ -32,12 +32,14 @@ function onYouTubeIframeAPIReady(loadedLesson){
 
       for(var x=0;x<lessonOtherCase.length;x++){
         let vidId = lessonOtherCase[x].source.vid_id
+        let timestamp = lessonOtherCase[x].source.timestamp.start
         console.log('forloop for lessonOtherCase is working!', vidId);
-        $('#videoLessonGroup'+i).append('<div id="nested-video-placeholder'+i+x+'" data-vidId='+vidId+' class="other-case-video video-inactive" ></div>')
-
+        $('#videoLessonGroup'+i).append('<div id="nested-video-placeholder'+i+x+'" data-vid-order='+nestedPlayers.length+' data-vidId='+vidId+' class="other-case-video video-inactive" ></div>')
+//explanation on data-vid-order = nestedPlayers.length is below
+//for nestedVideoCall() to know which video ifram variable to control, it needs to know the index of that video within the nestedPlayers array. the nestedPlayer.length provides the array index of that video.
          let video  = new YT.Player('nested-video-placeholder'+i+x, {
-          width: 800,
-          height: 500,
+          width: 700,
+          height: 400,
           videoId: vidId,
           playerVars: {
               autoplay: 0,
@@ -45,17 +47,18 @@ function onYouTubeIframeAPIReady(loadedLesson){
               controls:0,
               rel:0,
               iv_load_policy: 3
+          },
+          events:{
+            onReady: function(){
+              video.seekTo(timestamp)
+              video.pauseVideo()
+            }
           }
 
             })
             nestedPlayers.push(video)
-
-
+            console.log('this is the nestedPlayer! length ',nestedPlayers.length)
       }
-
-
-
-
       }
 }
 
