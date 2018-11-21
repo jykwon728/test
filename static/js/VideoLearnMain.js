@@ -102,7 +102,7 @@ function repeatShowScript(){
 
 function sentencePop(){
 
-var nowindex = currentIndex
+// var nowindex = currentIndex
 //var previndex = currentIndex-1
 var scriptNow = loadedScript[currentIndex];
 //var scriptNow = loadedScript[findindex()-1];
@@ -116,7 +116,7 @@ for(var i=0; i<currentwords.length; i++){
 }
   $(".realmain-words").on('click', function(){
     const number = $(this).attr('number');
-    const scriptNow = loadedScript[nowindex];
+    const scriptNow = loadedScript[currentIndex];
     const currentwords = scriptNow.WORDS;
 
   $('#sentenceBreakdown').html(""); //this takes away the existing word breakdown box
@@ -461,12 +461,17 @@ function nestedVideoCall(){
  selectedVideo.addClass('video-active')
   // get variable for selected nested player
   let selectedVideoOrder = selectedVideo.attr('data-vid-order')
-
   let startTime = loadedLesson[0].UsageCase.other_case[0].source.timestamp.start
-
   let endTime = loadedLesson[0].UsageCase.other_case[0].source.timestamp.end
 
   nestedPlayers[selectedVideoOrder].playVideo()
+  setTimeout(function() { nestedPlayers[selectedVideoOrder].pauseVideo() }, getTimeSpan())
+
+  function getTimeSpan(){
+      var timeSpan = endTime - startTime;
+      console.log('The time gap is', timeSpan);
+      return timeSpan * 1000;
+  }
 }
 
 
