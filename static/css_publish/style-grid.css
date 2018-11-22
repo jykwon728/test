@@ -27,6 +27,8 @@
             "pronunc explain explain"
             "wordtype explain explain";
   background: #ECECEC;
+  border-style: solid;
+  border-color: green;
   margin: 20px;
   font-family: 'Raleway', sans-serif;
   font-size: 20px auto;

@@ -15,7 +15,7 @@ html{
 }
 .right-side{
   grid-area: notebook;
-  background: blue;
+  background: #ECECEC;
   position: relative;
   /* display:block;
    float: right;

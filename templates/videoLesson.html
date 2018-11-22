@@ -2,7 +2,7 @@
 <html>
 <head>
    <meta charset="utf-8">
-   <title> Marllo_video playback </title>
+   <title> Marlo_video playback </title>
    <!-- <link rel="stylesheet" href = "../static/css/style.css">
    <link rel="stylesheet" href = "../static/css/style-grid.css">
    <link rel="stylesheet" href = "../static/css/style-lessonCard.css"> -->
@@ -30,9 +30,16 @@
                 <div id = "sentenceToLearn" class="sentence-learn">
 
                 </div>
-                <button id='nextButton' class='next-button'>next sentence</button>
-                <button id='learnButton' class='learn-button'>Learn</button>
-                <button id='beforeButton' class='before-button'>before sentence</button>
+
+                <div id='modalButtonGroup' class='btn-group' style='display: block'>
+                  <button id='learnButton' class='learn-button btn btn-success'>Learn</button>
+                  <button id='lessonCardButton' class="lesson-card-button btn btn-primary">Lesson</button>
+                  <!-- <i id="nextButton" class="fas fa-forward fa-2x"></i> -->
+                  <!-- <button id='nextButton' class='next-button btn'>next sentence</button> -->
+                  <!-- <i id="beforeButton" class="fas fa-backward fa-2x"></i> -->
+                  <!-- <button id='beforeButton' class='before-button'>before sentence</button> -->
+                </div>
+
             </div>
         </div>
       <div id="videoPlaceholder">
@@ -68,8 +75,8 @@
         <div id="lessonContent" class="lesson-content card">
           <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item"><a href="#" class="nav-link active"><i class="fa fa-star"></i></a></li>
-                  <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-star"></i></a></li>
+                  <li class="nav-item"><a href="#" class="nav-link active"><i class="fa fa-question"></i></a></li>
+                  <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-plus"></i></a></li>
                   <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-star"></i></a></li>
               </ul>
           </div>
@@ -88,17 +95,17 @@
 
 </div class="right-side">
 
-<div class = btnControls id="controls">
+<!-- <div class = btnControls id="controls">
 
-  <!-- <i id="back" class="fas fa-backward fa-2x"></i>
+  <i id="back" class="fas fa-backward fa-2x"></i>
   <i id="play" class="fas fa-play fa-2x"></i>
   <i id="pause" class="fa fa-pause fa-2x"></i>
   <i id="skip" class="fas fa-forward fa-2x"></i>
 
   <button id='lessonCardButton' class="lesson-card-button">Lesson Card</button>
   <button id='storeWord' class='db-button'>Store</button>
-  <button id='showTag' class='tag-button'>tags</button> -->
-</div>
+  <button id='showTag' class='tag-button'>tags</button>
+</div> -->
 
 </div>
 

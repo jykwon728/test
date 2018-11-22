@@ -8,14 +8,14 @@ html{
 }
 
 .left-side{
-  background: green;
+  /* background: green; */
 
   grid-area: videoholder
 
 }
 .right-side{
   grid-area: notebook;
-  background: blue;
+  background: #ECECEC;
   position: relative;
   /* display:block;
    float: right;
@@ -68,7 +68,7 @@ color: white;
 }
 
 .wordbreakdown-Word{
-    color: white;
+    color: green;
     grid-area: mainword;
     font-size: 1.5em;
 }

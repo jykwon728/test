@@ -12,11 +12,14 @@ function onYouTubeIframeAPIReady(loadedLesson){
       width: 800,
       height: 500,
       videoId: mainVideoId,
+      // videoId: 'rtg6U6P9vwY',
       playerVars: {
           autoplay: 0,
           color: 'white',
           controls:0,
           rel:0,
+          showinfo:0,
+          ecver: 2,
           iv_load_policy: 3
       },
       events: {

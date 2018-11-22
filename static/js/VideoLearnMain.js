@@ -1,9 +1,10 @@
 import {gettingScript} from './videoLesson/loadScript.js'
 import {onYouTubeIframeAPIReady as loadVideo, mainPlayer as player, nestedPlayers } from './videoLesson/youtubeAPI.js'
 
-var mainVideoId = '7ai3Av5sOAk'
-var scriptLocation = '../../newjson.json'
+var mainVideoId = 'LwkZQR9zZO8'
 
+// var scriptLocation = '../../newjson.json'
+var scriptLocation = '../../LwkZQR9zZO8.json'
 
 var loadedScript=[];
 var loadedLesson=[];
@@ -46,11 +47,12 @@ function checkPause(e){
     if (e.data == 2){
         console.log(e.data)
         modalPop()
+        SentenceToLearnPause()
     }
     else if (e.data==1){
         modalHide()
         lessonCardHide()
-
+        nestedVideoHide()
     }
 }
 
@@ -240,6 +242,10 @@ $(document).keydown(function(event){
      $("#sentenceToLearn").text(loadedScript[currentIndex].SENTENCE)
  })
 
+function SentenceToLearnPause(){
+     $("#sentenceToLearn").text(loadedScript[currentIndex].SENTENCE)
+ }
+
 function modalPop(){
     console.log('modalpop works')
     var modal = $(".custom-modal")
@@ -338,8 +344,10 @@ function loadLessonCard(){
 
     $('#cardTitle'+i).text(loadedLesson[i].TITLE)
     $('#cardDescription'+i).text(loadedLesson[i].Description)
-    $('#cardEquation'+i).text('here is how to use '+loadedLesson[i].UsageCase.main_case.lesson_element+' '+loadedLesson[i].Equation)
-
+    $('#cardEquation'+i).text('here is how to use '+loadedLesson[i].UsageCase.main_case.lesson_element)
+    $('#cardEquation'+i).append('<div id="actualEquation'+i+'"></div>').append('<div id="actualSentence'+i+'"></div>')
+    $('#actualEquation'+i).text(loadedLesson[i].Equation)
+    $('#actualSentence'+i).text('우리 회사')
 
 
     var numOtherCase = loadedLesson[i].UsageCase.other_case
@@ -474,5 +482,8 @@ function nestedVideoCall(){
   }
 }
 
+function nestedVideoHide(){
+  $('.other-case-video').removeClass('video-active')
+}
 
 export {mainVideoId, initialize, checkPause}

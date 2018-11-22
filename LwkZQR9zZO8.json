@@ -1,4 +1,5 @@
-[
+{
+  "caption":[
   {
     "TRANSLATION": "The report is well prepared",
     "END_AT": 2.5,
@@ -1207,4 +1208,40 @@
     ],
     "SENTENCE": "아이 짜식이"
   }
+],
+"lesson_content":[
+  { "VID": 2,
+    "SentenceIDX": 0,
+    "ID": 3,
+    "TITLE": "우리 -",
+    "LessonType": "vocabulary / culture",
+    "Equation": "우리 + noun",
+    "Description": "우리 is a pronoun / adjective commonly used to refer to a group that an individual feels emotional belongingness. It is a sentiment that is specific in Korean culture. Korean culture puts an emphasis on this type of belongningness.",
+    "Elements": {"Kor": "우리", "Eng": ["our","us"]},
+    "tag": "adjective",
+
+   "UsageCase": {
+      "main_case" :
+        {"sentence":"우리 회사이기 때문입니다.",
+        "lesson_element": "우리",
+        "peripheral_element": {
+            "left_side_element": null,"left_side_element_full form": null, "right_side_element": "회사", "right_side_element_fullform": null}
+          },
+
+      "other_case": [
+        {"sentence":"우리 나라",
+          "translation": "our country",
+          "lesson_element": "우리",
+          "peripheral_element": {
+              "left_side_element": null ,"left_side_element_fullform": null, "left_side_element_def": null, "right_side_element": "나라", "right_side_element_fullform": null, "right_side_element_def": "country"},
+          "source": {
+            "vid_id":"_TopBMd3fH4",
+            "viewed_date":"2018-11-07",
+            "timestamp":{"start":"70", "end":"81"}
+          }
+        }
+      ]
+    }
+  }
 ]
+}
