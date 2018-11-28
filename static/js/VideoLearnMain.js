@@ -31,6 +31,8 @@ gettingScript(scriptLocation)
 $('#learnButton').on('click', function(){
 
 console.log('learnButton works')
+$("#realmainsentContainer").children().remove()
+$("#sentenceBreakdown").children().remove()
 sentencePop();
 lessonBoxPop()
 learnSequence();
@@ -77,10 +79,20 @@ function findindex(){
   }//failsafe for when the last object in the script is reached
 }
 
-
+function checkForLesson(){
+  let lessonButton = $("#lessonCardButton")
+  let lessonSentIndex = loadedLesson[0].SentenceIDX;
+  if(currentIndex === lessonSentIndex){
+    // player.pauseVideo()
+  lessonButton.fadeIn("slow")
+}else{
+  lessonButton.fadeOut("slow")
+}
+}
 
 //this is the function that inputs the correct script and lesson into the corresponding div boxes
 function showScriptNow(){
+  checkForLesson()
   findindex()
   var scriptNow = loadedScript[currentIndex];
   var sentenceNow = scriptNow["SENTENCE"]
@@ -134,7 +146,7 @@ for(var i=0; i<currentwords.length; i++){
   $("#wordbreakdownTrans"+number+"").text(currentwords[number].TRANSLATION);
 
   $('#sentenceBreakdown').append("<div id=wordbreakdownPronun"+number+" class=wordbreakdown-Pronun></div>");
-  $("#wordbreakdownPronun"+number+"").text(currentwords[number].PRONOUNCIATION);
+  $("#wordbreakdownPronun"+number+"").text('[  '+currentwords[number].PRONOUNCIATION+'  ]');
 
   $('#sentenceBreakdown').append("<div id=wordbreakdownWordType"+number+" class=wordbreakdown-WordType></div>");
   $("#wordbreakdownWordType"+number+"").text(currentwords[number].WORD_TYPE);
@@ -251,10 +263,19 @@ function modalPop(){
     var modal = $(".custom-modal")
     console.log(modal)
     modal[0].style.display = 'block' //why need [0]??
+    let subtitleKor = $("#subtitleboxKor")
+    let subtitleEng = $("#subtitleboxEng")
+    subtitleKor.hide()
+    subtitleEng.hide()
+
 }
 function modalHide(){
     var modal= $(".custom-modal")
+    let subtitleKor = $("#subtitleboxKor")
+    let subtitleEng = $("#subtitleboxEng")
     modal[0].style.display='none'
+    subtitleKor.show()
+    subtitleEng.show()
 }
 //function that displays the mainSent boxes
 function lessonBoxPop(){
@@ -275,13 +296,22 @@ function lessonCardPop(){
 function lessonCardHide(){
   let lessonContainer = $("#lessonCard")
   lessonContainer[0].style.display = 'none'
+
+  let currentActive = $(".card-body div.active");
+  let firstOrder =  $(".card-body div[data-order='1']");
+
+    $(currentActive).removeClass('active');
+    $(currentActive).addClass('inactive');
+    $(firstOrder).removeClass('inactive');
+    $(firstOrder).addClass('active');
 }
 
 //load all necessary lesson card components
 $("#lessonCardButton").on('click',function(){
+player.pauseVideo();
 lessonBoxHide()
 lessonCardPop()
-console.log('lessCardButton is working');
+console.log('lessonCardButton is working');
 // $('#lessonContent').html("");
 
 
@@ -316,11 +346,12 @@ $("#cardButtonNext").on('click', function(){
     $(nextActive).addClass('active');
 
   }else{
+
     $(currentActive).removeClass('active');
     $(currentActive).addClass('inactive');
     $(nextActive).removeClass('inactive');
     $(nextActive).addClass('active');
-
+    $('#cardButtonNext').show();
 
   }
 
@@ -345,7 +376,7 @@ function loadLessonCard(){
     $('#cardTitle'+i).text(loadedLesson[i].TITLE)
     $('#cardDescription'+i).text(loadedLesson[i].Description)
     $('#cardEquation'+i).text('here is how to use '+loadedLesson[i].UsageCase.main_case.lesson_element)
-    $('#cardEquation'+i).append('<div id="actualEquation'+i+'"></div>').append('<div id="actualSentence'+i+'"></div>')
+    $('#cardEquation'+i).append('<div id="actualEquation'+i+'" class="actual-equation" style="background-color: green;"></div>').append('<div id="actualSentence'+i+'" class="actual-sentence"></div>')
     $('#actualEquation'+i).text(loadedLesson[i].Equation)
     $('#actualSentence'+i).text('우리 회사')
 
@@ -378,7 +409,7 @@ function loadLessonCard(){
       //get corrensponding video's attribute data-vid-order
 
 
-      $('#cardCaseVidImage'+i+x).append('<img id="caseVidImage'+i+x+'" vidId="'+otherCaseVidId+'" class="case-vid-image" src="'+imgurl+'"  height="250" width="350"></img>')
+      $('#cardCaseVidImage'+i+x).append('<img id="caseVidImage'+i+x+'" vidId="'+otherCaseVidId+'" class="case-vid-image" src="'+imgurl+'"  height="170" width="250"></img>')
       $('#caseVidImage'+i+x).on('click', nestedVideoCall)
 
 
@@ -437,7 +468,7 @@ lessonCases.on('click', activateCase)
 function activateCase(){
   let index = $(this).attr("data-index");
   //selected will activate the clicked and set animation
-  console.log('bringCaseSource Working! ', index)
+  // console.log('bringCaseSource Working! ', index)
   $(".case-sentence").removeClass('case-active')
   $(".case-sentence").addClass('case-inactive')
   $(".card-case-content-wrapper").removeClass('case-content-active')
@@ -485,5 +516,7 @@ function nestedVideoCall(){
 function nestedVideoHide(){
   $('.other-case-video').removeClass('video-active')
 }
+
+// function
 
 export {mainVideoId, initialize, checkPause}

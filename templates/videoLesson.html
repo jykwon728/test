@@ -33,7 +33,7 @@
 
                 <div id='modalButtonGroup' class='btn-group' style='display: block'>
                   <button id='learnButton' class='learn-button btn btn-success'>Learn</button>
-                  <button id='lessonCardButton' class="lesson-card-button btn btn-primary">Lesson</button>
+
                   <!-- <i id="nextButton" class="fas fa-forward fa-2x"></i> -->
                   <!-- <button id='nextButton' class='next-button btn'>next sentence</button> -->
                   <!-- <i id="beforeButton" class="fas fa-backward fa-2x"></i> -->
@@ -42,7 +42,7 @@
 
             </div>
         </div>
-      <div id="videoPlaceholder">
+      <div id="videoPlaceholder" class="video-place-holder">
         <div id="mainVideoPlaceholder" class="main-video-placeholder">
 
         </div>
@@ -50,6 +50,7 @@
         <section class = subBox>
           <div class = "korsub" style="font-size:20px" id="subtitleboxKor"></div>
           <div class = "engsub" id="subtitleboxEng"></div>
+          <button id='lessonCardButton' class="lesson-card-button btn btn-primary" style="display: none">Lesson</button>
         </section>
 
       </div>
@@ -66,8 +67,10 @@
 
       <!-- <button id='hearVoice' class='before-button'>listen to it slowly</button> -->
       <section id="lessonBox" class="lesson-box">
-          <div id="sentenceBreakdown" class="sentenceBreak">
+          <div id="sentenceBreakdown" class="sentence-breakdown">
           </div>
+<button id="sentenceStructureShowButton" class="btn btn-outline-secondary">Watch Structure</button>
+          <div id="sentenceDirect" class="sentence-direct"></div>
       </section>
 
       <div id="lessonCard" class="lesson-content-container">
@@ -75,9 +78,9 @@
         <div id="lessonContent" class="lesson-content card">
           <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item"><a href="#" class="nav-link active"><i class="fa fa-question"></i></a></li>
-                  <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-plus"></i></a></li>
-                  <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-star"></i></a></li>
+                  <li id=iconDescription class="nav-item"><a href="#" class="nav-link active"><i class="fa fa-question"></i></a></li>
+                  <li id=iconEquation class="nav-item"><a href="#" class="nav-link"><i class="fa fa-plus"></i></a></li>
+                  <li id=iconCardCase class="nav-item"><a href="#" class="nav-link"><i class="fa fa-star"></i></a></li>
               </ul>
           </div>
           <section id="cardBody" class="card-body">

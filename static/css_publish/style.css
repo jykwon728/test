@@ -25,41 +25,53 @@ html{
 
 }
 .video-wrapper{
-position:relative;
-width:100%;
-background: clear;
+  position:relative;
+  width:100%;
+  background: clear;
 }
 .subBox {
-position: absolute;
-bottom:17px;
-width: 100%;
-display: block;
-font-family: 'Raleway', sans-serif;
-background: black;
-color : #ffffff;
-opacity :0.75;
-font-size:20px;
-padding-top: 0px;
-padding-bottom: 0px;
-/* padding-right: 80px;
-padding-left: 80px; */
-margin: 0 auto;
-text-align: center;
-z-index: 10;
+  position: absolute;
+  bottom:17px;
+  width: 100%;
+  display: block;
+  font-family: 'Raleway', sans-serif;
+  background: black;
+  color : #ffffff;
+  opacity :0.75;
+  font-size:20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  /* padding-right: 80px;
+  padding-left: 80px; */
+  margin: 0 auto;
+  text-align: center;
+  z-index: 10;
+}
+.lesson-card-button{
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+}
+
+.video-place-holder{
+  width:100%;
+}
+.main-video-placeholder{
+  width:100%;
 }
 .custom-modal{
-display: none;
-position: absolute;
-z-index:10;
-top: 180px;
-height: 30%;
-width: 100%;
-overflow: auto;
-background-color: rgba(0,0,0,0.65);
-margin: 0 auto;
-text-align: center;
-font-size: 25px;
-color: white;
+  display: none;
+  position: absolute;
+  z-index:10;
+  top: 180px;
+  height: 30%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.65);
+  margin: 0 auto;
+  text-align: center;
+  font-size: 25px;
+  color: white;
 }
 .custom-modal-content{
     margin: 0 auto;
@@ -74,7 +86,7 @@ color: white;
 }
 .wordbreakdown-Pronun{
     grid-area: pronunc;
-    font-size: 0.9em;
+    font-size: 1.3em;
 }
 .wordbreakdown-Trans{
     grid-area: explain;
@@ -92,7 +104,7 @@ color: white;
   background: blue;
   border: 30px;
   border-color: white;
-display: inline-block;
+  display: inline-block;
 }
 
 .note-container{
